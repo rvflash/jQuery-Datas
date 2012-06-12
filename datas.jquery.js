@@ -12,7 +12,7 @@
  */
 ;
 (function($) {
-    var pattern = /^data(s)?\-(.+)$/;
+    var pattern = /^(.*)data(s)?\-(\S+)(.*)$/;
 
     var datas = function(elem) {
         var data = {
@@ -29,13 +29,13 @@
             });
         };
         $.each(contents(elem), function(index, element) {
-            if ('undefined' != typeof (element.className.match(pattern)[1])) {
-                data[element.className.match(pattern)[2]] = [];
+            if ('undefined' != typeof (element.className.match(pattern)[2])) {
+                data[element.className.match(pattern)[3]] = [];
                 $.each(childrens(element), function(index, child) {
-                    data[element.className.match(pattern)[2]][index] = $(child).html();
+                    data[element.className.match(pattern)[3]][index] = $(child).html();
                 });
             } else {
-                data[element.className.match(pattern)[2]] = $(element).html();
+                data[element.className.match(pattern)[3]] = $(element).html();
             }
         });
         return $(elem).data(data);
